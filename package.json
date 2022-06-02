@@ -14,7 +14,7 @@
 		}
 	},
 	"scripts": {
-		"start": "concurrently -k \"cross-env BROWSER=none react-scripts start\" \"build-electron\" \"wait-on public/.build-electron-done http://localhost:3000/ && electron .\"",
+		"start": "concurrently -k \"cross-env BROWSER=none react-scripts start\" \"build-electron -d\" \"wait-on public/.build-electron-done http://localhost:3000/ && electron .\"",
 		"build": "build-electron && react-scripts build",
 		"prod": "npm run build && npm exec electron-builder --mac"
 	},

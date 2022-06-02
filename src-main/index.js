@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, protocol } = require("electron");
 const path = require("path");
+const isDev = require("electron-is-dev");
 
 if (module.hot) {
 	module.hot.accept();
@@ -10,23 +11,18 @@ function createWindow() {
 	const win = new BrowserWindow({
 		width: 1280,
 		height: 800,
+		title: "Graffiti Resize",
 		webPreferences: {
 			nodeIntegration: true,
-			preload: path.resolve(__dirname, "./preload.js"),
+			preload: path.resolve(__dirname, "preload.js"),
 		},
 	});
 
-	const startUrl =
-		process.env.ELECTRON_START_URL ||
-		url.format({
-			pathname: path.join(__dirname, "./index.html"),
-			protocol: "file:",
-			slashes: true,
-		});
-
 	// Load the index.html from an url or a file
-	console.log(startUrl);
-	win.loadURL(startUrl);
+	console.log(isDev);
+	isDev
+		? win.loadURL("http://localhost:3000/")
+		: win.loadFile(path.resolve(__dirname, "index.html"));
 
 	// Open the DevTools.
 	win.webContents.openDevTools();

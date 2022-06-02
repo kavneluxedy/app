@@ -1,0 +1,7 @@
+"fast": "npm exec electron-builder --mac",
+"test": "react-scripts test --env=jsdom",
+"electron": "electron .",
+"electron-start": "node public/electron-wait-react",
+"react": "react-scripts start",
+"pack": "build --dir",
+"postinstall": "electron-builder install-app-deps"
