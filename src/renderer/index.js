@@ -1,12 +1,6 @@
-const { ipcRenderer } = require("electron");
-const App = require("../App.js");
+const React = require("react");
+const reactDOM = require("react-dom");
 
-if (module.hot) {
-	module.hot.accept();
-}
-
-// Debug
-console.log(App);
-console.log("__DBG__ " + ipcRenderer);
-
-document.getElementById("app").innerHTML += "HELLO WORLD !";
+const element = document.getElementById("app");
+const root = reactDOM.createRoot(container);
+root.render(element);

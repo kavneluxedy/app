@@ -15,11 +15,11 @@ function createWindow() {
 		webPreferences: {
 			nodeIntegration: true,
 			preload: path.resolve(__dirname, "preload.js"),
+			preload: path.resolve(__dirname, "renderer.js"),
 		},
 	});
 
 	// Load the index.html from an url or a file
-	console.log(isDev);
 	isDev
 		? win.loadURL("http://localhost:3000/")
 		: win.loadFile(path.resolve(__dirname, "index.html"));

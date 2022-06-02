@@ -5,6 +5,19 @@
 	"description": "An image resize app",
 	"main": "public/main.js",
 	"homepage": "./",
+	"electronWebpack": {
+		"commonSourceDirectory": "src/common",
+		"staticSourceDirectory": "src/static",
+		"title": true,
+		"main": {
+			"sourceDirectory": "src/main"
+		},
+		"renderer": {
+			"sourceDirectory": "src/renderer",
+			"template": "public/index.html",
+			"webpackConfig": "custom.webpack.renderer.js"
+		}
+	},
 	"build": {
 		"extraMetadata": {
 			"main": "build/main.js"
@@ -15,14 +28,17 @@
 	},
 	"scripts": {
 		"start": "concurrently -k \"cross-env BROWSER=none react-scripts start\" \"build-electron -d\" \"wait-on public/.build-electron-done http://localhost:3000/ && electron .\"",
-		"build": "build-electron && react-scripts build",
-		"prod": "npm run build && npm exec electron-builder --mac"
+		"main-build": "build-electron",
+		"render-build": "electron-webpack && react-scripts build",
+		"build": "npm run main-build && npm run render-build",
+		"prod": "npm run build && npm exec electron-builder --mac",
+		"eject": "react-scripts eject"
 	},
 	"dependencies": {
 		"downloadjs": "^1.4.7",
 		"electron-webpack": "^2.8.2",
 		"react": "^18.0.0",
-		"react-dom": "^18.0.0",
+		"react-dom": "^18.1.0",
 		"react-image-file-resizer": "^0.4.7",
 		"react-router-dom": "^6.3.0",
 		"source-map-support": "^0.5.16"
